@@ -1,10 +1,7 @@
 <template>
   <div class="hero">
     <div class="about">
-      <h1>This is an about page</h1>
-      <h3>
-        I used Vue + Vuetify for our Frontend and Firebase for our Backend.
-      </h3>
+      <h1>This is a More page</h1>
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur,
         dignissimos. Esse quidem quaerat facere, animi itaque obcaecati iste non

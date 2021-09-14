@@ -1,0 +1,79 @@
+// import { initializeApp } from "firebase/app";
+// import { getFirestore } from "firebase/firestore";
+import { ref, onUnmounted } from 'vue'
+
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+
+const firebaseApp = firebase.initializeApp({
+    apiKey: "AIzaSyCVXIm2rqoHbVhT8kGjqx2yfy6Xi6dN3-Q",
+    authDomain: "twitterclone-8ade8.firebaseapp.com",
+    projectId: "twitterclone-8ade8",
+    storageBucket: "twitterclone-8ade8.appspot.com",
+    messagingSenderId: "675395236632",
+    appId: "1:675395236632:web:bb49a1d0d7df4b8f8f246d",
+    measurementId: "G-GG2T0H6LH3"
+});
+
+const db = firebaseApp.firestore()
+const qweetsCollection = db.collection('qweets')
+
+export const createQweet = qweet => {
+    return qweetsCollection.add(qweet)
+}
+
+export const deleteQweet = id => {
+    return qweetsCollection.doc(id).delete()
+}
+
+export const useLoadQweets = () => {
+    const qweets = ref([])
+
+    const close = qweetsCollection.onSnapshot(snapshot => {
+        qweets.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+    });
+
+    onUnmounted(close)
+    return qweets
+}
+
+// import 'firebase/auth'
+// import { ref, onUnmounted } from 'vue'
+
+// const firebaseApp = initializeApp({
+//   apiKey: "AIzaSyCVXIm2rqoHbVhT8kGjqx2yfy6Xi6dN3-Q",
+//   authDomain: "twitterclone-8ade8.firebaseapp.com",
+//   projectId: "twitterclone-8ade8",
+//   storageBucket: "twitterclone-8ade8.appspot.com",
+//   messagingSenderId: "675395236632",
+//   appId: "1:675395236632:web:bb49a1d0d7df4b8f8f246d",
+//   measurementId: "G-GG2T0H6LH3"
+// });
+
+// const db = getFirestore();
+
+// const firebaseApp = firebase.initializeApp({
+//     apiKey: "AIzaSyCVXIm2rqoHbVhT8kGjqx2yfy6Xi6dN3-Q",
+//     authDomain: "twitterclone-8ade8.firebaseapp.com",
+//     projectId: "twitterclone-8ade8",
+//     storageBucket: "twitterclone-8ade8.appspot.com",
+//     messagingSenderId: "675395236632",
+//     appId: "1:675395236632:web:bb49a1d0d7df4b8f8f246d",
+//     measurementId: "G-GG2T0H6LH3"
+// })
+
+// const firebaseConfig = {
+//     apiKey: "AIzaSyCVXIm2rqoHbVhT8kGjqx2yfy6Xi6dN3-Q",
+//     authDomain: "twitterclone-8ade8.firebaseapp.com",
+//     projectId: "twitterclone-8ade8",
+//     storageBucket: "twitterclone-8ade8.appspot.com",
+//     messagingSenderId: "675395236632",
+//     appId: "1:675395236632:web:bb49a1d0d7df4b8f8f246d",
+//     measurementId: "G-GG2T0H6LH3"
+// }
+
+// firebase.initializeApp(firebaseConfig)
+
+// let db = firebase.firestore()
+
+// export default db
